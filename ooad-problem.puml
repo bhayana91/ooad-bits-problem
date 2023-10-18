@@ -1,5 +1,6 @@
 @startuml
 
+left to right direction
 actor Manager
 actor AssetAdministrator as "Asset Administrator"
 
@@ -18,6 +19,7 @@ card"
  }
 
  Manager --> UserManagement
+ GrantUserPermission .> UserManagement :extends
  Manager --> ReportsManagement
  Manager --> DocumentManagement
  Manager --> ProcurementRequestApproval
@@ -26,7 +28,7 @@ card"
  AssetAdministrator --> AssetRelease
  AssetAdministrator --> AssetMaintenance
  AssetAdministrator --> AssetTracking
- GrantUserPermission .> UserManagement :extends
+ 
 
 
 
