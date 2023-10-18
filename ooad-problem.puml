@@ -1,0 +1,33 @@
+@startuml
+
+actor Manager
+actor AssetAdministrator as "Asset Administrator"
+
+ package AMS as "Asset Management System" {
+     usecase UserManagement as "User Management"
+     usecase ReportsManagement as "Reports Management"
+     usecase DocumentManagement as "Document Management"
+     usecase ProcurementRequestApproval as "Procurement Request Approval"
+     usecase ProcurementRequestManagement as "Procurement Request Management"
+     usecase Insertprocureditemsviaratecard as "Insert procured items via rate
+card"
+     usecase AssetRelease as "Asset Release"
+     usecase AssetMaintenance as "Asset Maintenance"
+     usecase AssetTracking as "Asset Tracking"
+     usecase GrantUserPermission as "Grant User Permission"
+ }
+
+ Manager --> UserManagement
+ Manager --> ReportsManagement
+ Manager --> DocumentManagement
+ Manager --> ProcurementRequestApproval
+ AssetAdministrator --> ProcurementRequestManagement
+ AssetAdministrator --> Insertprocureditemsviaratecard
+ AssetAdministrator --> AssetRelease
+ AssetAdministrator --> AssetMaintenance
+ AssetAdministrator --> AssetTracking
+ GrantUserPermission .> UserManagement :extends
+
+
+
+@enduml
