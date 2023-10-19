@@ -1,4 +1,4 @@
-@startuml
+@startuml OOAD
 
 left to right direction
 actor Manager
