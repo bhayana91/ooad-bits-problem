@@ -3,6 +3,7 @@
 left to right direction
 actor Manager
 actor AssetAdministrator as "Asset Administrator"
+actor SystemAdministrator as "System Administrator"
 
  package AMS as "Asset Management System" {
      usecase UserManagement as "User Management"
@@ -16,20 +17,44 @@ card"
      usecase AssetMaintenance as "Asset Maintenance"
      usecase AssetTracking as "Asset Tracking"
      usecase GrantUserPermission as "Grant User Permission"
+     usecase AssetOwnershipManagement as "Asset Ownership Management"
+     usecase InventoryNotification as "Inventory Notification"
+     usecase CheckAssetAvailability as "Check Asset Availability"
+     usecase CheckAssetsReleasedToEmployee as "Check assets released to employee"
+     usecase AssetTagHistory as "Asset Tag History"
+     usecase AssetTagEmployee as "Asset Tag to Employee"
+     usecase ValidAssetTransfer as "Validate Asset Transfer"
+     usecase CheckAssetCondition as "Check Asset Condition"
+     usecase AssetDisposal as "Asset Disposal"
+     usecase CheckLowInventory as "Check Low Inventory"
+     usecase CheckWarranty as "Check Warranty"
+     usecase RepairDetails as "CRUD Repair Details"
  }
 
- Manager --> UserManagement
- GrantUserPermission .> UserManagement :extends
- Manager --> ReportsManagement
- Manager --> DocumentManagement
- Manager --> ProcurementRequestApproval
- AssetAdministrator --> ProcurementRequestManagement
- AssetAdministrator --> Insertprocureditemsviaratecard
- AssetAdministrator --> AssetRelease
- AssetAdministrator --> AssetMaintenance
- AssetAdministrator --> AssetTracking
- 
-
+Manager --> UserManagement
+GrantUserPermission .> UserManagement :extends
+Manager --> ReportsManagement
+Manager --> DocumentManagement
+Manager --> ProcurementRequestApproval
+AssetAdministrator --> ProcurementRequestManagement
+AssetAdministrator --> Insertprocureditemsviaratecard
+AssetAdministrator --> AssetRelease
+AssetRelease .> CheckAssetAvailability :includes
+AssetRelease .> CheckAssetsReleasedToEmployee :includes
+AssetAdministrator --> AssetMaintenance
+AssetAdministrator --> AssetTracking
+AssetTagHistory .> AssetTracking :extends
+AssetTagEmployee .> AssetTracking :extends
+AssetAdministrator --> AssetOwnershipManagement
+AssetOwnershipManagement .> ValidAssetTransfer :includes
+AssetOwnershipManagement .> CheckAssetCondition :includes
+AssetDisposal .> CheckAssetCondition :extends
+AssetAdministrator --> InventoryNotification
+InventoryNotification .> CheckLowInventory :includes
+InventoryNotification .> CheckWarranty :includes
+AssetMaintenance .> RepairDetails :includes
+SystemAdministrator -d-> AssetMaintenance
+SystemAdministrator -d-> AssetTracking
 
 
 @enduml
