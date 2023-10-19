@@ -1,0 +1,13 @@
+@startuml AssetRelease
+
+actor AssetAdministrator as "Asset Administrator"
+
+package AR as "Asset Release" {
+    usecase AssetRelease as "Asset Release"
+    usecase CheckAssetAvailability as "Check Asset Availability"
+     usecase CheckAssetsReleasedToEmployee as "Check assets released to employee"
+}
+AssetAdministrator --> AssetRelease
+AssetRelease .> CheckAssetAvailability :includes
+AssetRelease .> CheckAssetsReleasedToEmployee :includes
+@enduml
